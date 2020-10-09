@@ -1,0 +1,109 @@
+<html>
+<head style="border-style: solid;">
+<script type="text/javascript" src="/static/bankingsystem.js"></script>
+<body>	
+<div style=" font-family:times new roman; color: blue;background: rgb(255,255,255);background: linear-gradient(90deg, rgba(255,255,255,1) 45%, rgba(255,215,10,1) 80%);">
+	<div style="width: 33.3%;display: inline-block;">
+			<image src="static/tsflogo.png" width="100" height="100" style="display:inline-block;"/>
+	</div>
+	<div style="width: 40%;display: inline-block;">
+		<h1 style="display:inline-block;text-align: center;text-decoration-line: underline; /*margin: auto;? */">THE SPARKS FOUNDATION BANK </h1>
+	</div>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+</body>
+<body style="background-image:url(sky1.jpg);">
+
+<h1 style="text-align: center; color: red;text-decoration-line: underline;text-decoration-color:red;text-decoration-style:double;text-align: center;font-family: times new roman;">WELCOME</h1>
+<!--form id="frm1" -->
+<center>
+<table cellspacing="4">
+<tr>
+<th>Name of holder(FROM):<select id="dropdowndemo">
+<option value="name">name </option>
+<option value="virat">virat </option>
+<option value="mahi">mahi </option>
+<option value="suresh">suresh </option>
+<option value="ramesh">ramesh </option>
+<option value="mahesh">mahesh</option>
+<option value="rajesh">rajesh</option>
+<option value="ramu">ramu</option>
+<option value="shamu">shamu</option>
+<option value="shiva">shiva </option>
+<option value="somu">somu</option>
+</select><br><br>
+</th>
+<th><p id="first_money"></p></th>
+</tr>
+<tr>
+<th>Name of holder(TO):<select id="receiver_dropdown">
+<option value="name">name </option>
+<option value="virat">virat </option>
+<option value="mahi">mahi </option>
+<option value="suresh">suresh </option>
+<option value="ramesh">ramesh </option>
+<option value="mahesh">mahesh</option>
+<option value="rajesh">rajesh</option>
+<option value="ramu">ramu</option>
+<option value="shamu">shamu</option>
+<option value="shiva">shiva </option>
+<option value="somu">somu</option>
+</select><br><br>
+</th>
+<th><p id="receiver_money"></p></th>
+</tr>
+
+<tr>
+<th>Amount :<input type="number" id="Amount" value="" placeholder= "amount"size="10"><br><br></th>
+</tr>
+<tr>
+<th>
+<button type="submit" name="submit" value="submit" onclick="myfunction()">Transfer</button>
+
+</th>
+</tr>
+</center>
+</table>
+<!--/form-->
+
+<script type="text/javascript">
+	$("#dropdowndemo").on("change",function(e){
+		var sender = $("#dropdowndemo").val();
+		console.log(sender);
+		$.ajax({
+			url:'get_accountbalance',
+			method:'post',
+			data:JSON.stringify({'selected':sender}),
+			datatype:'JSON',
+			contentType: "application/json",
+			success:function(response){
+				console.log(response);
+				$("#first_money").html("Rs:"+response['balance']);
+			}
+		})
+	})
+$("#receiver_dropdown").on("change",function(e){
+		var sender = $("#receiver_dropdown").val();
+		console.log(sender);
+		$.ajax({
+			url:'get_accountbalance',
+			method:'post',
+			data:JSON.stringify({'selected':sender}),
+			datatype:'JSON',
+			contentType: "application/json",
+			success:function(response){
+				console.log(response);
+				$("#receiver_money").html("Rs:"+response['balance']);
+			}
+		})
+	})
+
+</script>
+
+
+
+</body>
+</html>
